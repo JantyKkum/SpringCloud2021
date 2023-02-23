@@ -27,7 +27,8 @@ public class PaymentController {
     @Value("${server.port}")            //注入服务器的端口号
     private String port;
 
-    @PostMapping(value = "/payment/create")
+//    @PostMapping(value = "/payment/create")
+    @RequestMapping(value = "/payment/create")
     public CommonResult<Payment> create(@RequestBody Payment payment){ //埋雷
         int result = paymentService.create(payment);
         log.info("*****插入结果："+result);
@@ -54,6 +55,11 @@ public class PaymentController {
         System.out.println("port = " + port);
         try { TimeUnit.SECONDS.sleep(3); }catch (Exception e) {e.printStackTrace();} //单位秒
         return port;
+    }
+
+    @GetMapping("/payment/zipkin")
+    public String paymentZipkin(){
+        return "hi ,i'am paymentzipkin server，welcome to atguigu，O(∩_∩)O哈哈~";
     }
 
 }

@@ -35,4 +35,12 @@ public class OrderController {
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id){
         return restTemplate.getForObject(PAYMENT_URL+"/payment/get/"+id,CommonResult.class);
     }
+
+    //==> zipkin+sleuth
+    @GetMapping("/consumer/payment/zipkin")
+    public String paymentZipkin(){
+//        String result = restTemplate.getForObject("http://localhost:8001"+"/payment/zipkin/", String.class);
+        String result = restTemplate.getForObject("http://CLOUD-PAYMENT-SERVICE"+"/payment/zipkin/", String.class);
+        return result;
+    }
 }
